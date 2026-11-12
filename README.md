@@ -1,6 +1,6 @@
 # dtb
 
-`dtb` is the computation engine behind the nlmx apps **Prep Studio** (PREP), **Trial Simulator** (TRIAL) and **BE & DDI Studio** (BEDDI). It is a single Rust program with no network access and no other files to install. The apps find it by themselves when they start and hand it the heavy work: simulations, bioequivalence models, dataset checks and recipes. Without it the apps keep working with their built-in JavaScript.
+`dtb` is a single Rust program with no network access and no other files to install. The apps find it by themselves when they start and hand it the heavy work: simulations, bioequivalence models, dataset checks and recipes. Without it the apps keep working with their built-in JavaScript.
 
 It is also a command-line tool in its own right. Everything the apps compute can be run from a terminal, from a script or from a pipeline file, with the same seed giving the same bytes on any machine.
 
