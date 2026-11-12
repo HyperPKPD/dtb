@@ -1,0 +1,27 @@
+name = "Example: trial simulation"
+description = "Validates a design, simulates it, and writes the sensitivity analysis."
+
+[settings]
+seed = 2026
+out_dir = "out-trial"
+
+[[step]]
+id = "check"
+command = "trial.validate"
+[step.params]
+design = { "$file" = "data/trial-design.json" }
+
+[[step]]
+id = "run"
+command = "trial.run"
+[step.params]
+design = { "$file" = "data/trial-design.json" }
+trials = 2000
+
+[[step]]
+id = "tornado"
+command = "trial.tornado"
+[step.params]
+design = { "$file" = "data/trial-design.json" }
+armId = "a3"
+trials = 500

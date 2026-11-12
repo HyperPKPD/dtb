@@ -1,0 +1,39 @@
+name = "Example: bioequivalence and sample size"
+description = "Analyses a 2x2 crossover for Cmax and AUC, then sizes a follow-up study from the observed variability."
+
+[settings]
+seed = 2026
+out_dir = "out-be"
+
+[[step]]
+id = "be"
+command = "be.analyze"
+note = "Average bioequivalence (80.00-125.00 %), log scale."
+[step.params]
+table = { "$file" = "data/crossover.csv" }
+params = ["Cmax", "AUC"]
+[step.params.map]
+subject = "SUBJ"
+sequence = "SEQ"
+period = "PER"
+treatment = "TRT"
+[step.params.options]
+test = "T"
+ref = "R"
+[[step.write]]
+from = "results.Cmax"
+to = "cmax.json"
+format = "json"
+
+[[step]]
+id = "size"
+command = "power.size"
+note = "Sample size from the Cmax CV observed above, true ratio 0.95."
+[step.params.args]
+cv = { "$ref" = "be.results.Cmax.cv" }
+theta0 = 0.95
+design = "2x2"
+[[step.write]]
+from = ""
+to = "sample-size.json"
+format = "json"

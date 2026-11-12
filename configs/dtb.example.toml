@@ -1,0 +1,32 @@
+# dtb configuration. Every setting is optional; the values below are the defaults.
+# Precedence (highest first): command-line options, the parameters of a call, DTB_* environment variables, this file.
+# Unknown keys are an error, so a misspelt setting is never silently ignored.
+
+[general]
+threads = 0          # worker threads; 0 = all cores. Results never depend on this.
+# seed = 12345       # default random seed when a call gives none
+timing = false       # add elapsed time and threads to the output (output then differs between runs)
+pretty = false       # indented JSON
+
+[limits]             # safety limits: a request above any of them is refused (exit code 5)
+max_input_mb = 256   # largest input file or stdin
+max_rows = 5000000   # rows of any table
+max_columns = 2000
+max_trials = 1000000 # simulated trials per scenario
+max_scenarios = 100
+max_sims = 5000000   # simulated studies for scaled bioequivalence power
+max_points = 5000    # points of a curve
+max_subjects = 200000
+max_steps = 500      # steps of a recipe or pipeline
+
+[trial]
+streams = "blocks"   # "blocks": parallel, identical on any number of threads; "js": the same numbers as the browser engine
+trials = 1000
+
+[power]
+streams = "blocks"
+sims = 10000
+
+[prep]
+delimiter = "auto"   # auto, comma, tab, semicolon, pipe, space
+missing = "."        # how a missing value is written in exported datasets

@@ -1,0 +1,92 @@
+{
+  "name": "Example trial",
+  "seed": 2026,
+  "arms": [
+    {
+      "id": "a1",
+      "name": "Placebo",
+      "dose": 0,
+      "n": 30,
+      "control": true
+    },
+    {
+      "id": "a2",
+      "name": "50 mg once daily",
+      "dose": 50,
+      "n": 30,
+      "control": false
+    },
+    {
+      "id": "a3",
+      "name": "100 mg once daily",
+      "dose": 100,
+      "n": 30,
+      "control": false
+    }
+  ],
+  "tau": 24,
+  "durationWeeks": 6,
+  "pk": {
+    "model": "oral",
+    "CL": 5,
+    "V": 50,
+    "ka": 1,
+    "F": 1,
+    "cvCL": 0.3,
+    "cvV": 0.25,
+    "cvKa": 0.4,
+    "concFactor": 1000
+  },
+  "adherence": {
+    "mean": 0.9,
+    "sd": 0.12
+  },
+  "dropout": {
+    "ratePerWeek": 0.012,
+    "doseSlope": 0
+  },
+  "dropoutHandling": "completers",
+  "endpoint": {
+    "type": "continuous",
+    "metric": "cavg",
+    "benefit": "lower",
+    "label": "Change in systolic blood pressure",
+    "unit": "mmHg"
+  },
+  "er": {
+    "continuous": {
+      "placebo": -3,
+      "emax": -10,
+      "ec50": 500,
+      "hill": 1,
+      "sd": 12
+    },
+    "binary": {
+      "baseline": 0.25,
+      "emax": 1.8,
+      "ec50": 250,
+      "hill": 1
+    },
+    "tte": {
+      "hazard0": 0.02,
+      "imax": 0.5,
+      "ec50": 250,
+      "hill": 1
+    }
+  },
+  "uncertainty": {
+    "enabled": false,
+    "sdLogEC50": 0.4,
+    "relSdEmax": 0.25,
+    "sdLogCL": 0.15
+  },
+  "decision": {
+    "kind": "lrv-tv",
+    "alpha": 0.025,
+    "mcid": 3,
+    "goThreshold": 2,
+    "goProb": 0.8,
+    "nogoThreshold": 5,
+    "nogoProb": 0.2
+  }
+}
